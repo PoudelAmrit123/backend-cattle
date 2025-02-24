@@ -33,7 +33,7 @@ export const getCowActivityDetailsByTimeStamp = async(req , res)=>{
         })
 
 
-          const {summary , activityMap} =  timeStamp(duration , groupedData[cowId])
+          const {summary , activityMap , highestBehavior} =  timeStamp(duration , groupedData[cowId])
 
 
 
@@ -42,7 +42,8 @@ export const getCowActivityDetailsByTimeStamp = async(req , res)=>{
     const data = {
         dataWithInTimeStamp ,
         summary,
-        activityMap
+        activityMap,
+        highestBehavior
         
     }
 

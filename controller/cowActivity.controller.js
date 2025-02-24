@@ -1,5 +1,5 @@
 import { getDB } from "../db/db.js"
-import { timeStamp } from "../utils/time.behavior.js"
+import { allTime, timeStamp } from "../utils/time.behavior.js"
 
 
 export const getCowActivityDetailsById  =async (req , res)=>{
@@ -20,15 +20,18 @@ export const getCowActivityDetailsById  =async (req , res)=>{
        } , {})
 
 
-       const data = groupedData[cowID]
+       const dataWithInTimeStamp = groupedData[cowID]
 
-    const { summary , activityMap} =    timeStamp(300 , data)
-    const summarizedData  = {
+    // const { summary , activityMap , highestBehavior , dataWithInTimeStamp} =    timeStamp(10300 , datatosend)
+    const { summary , activityMap , highestBehavior } =  allTime(dataWithInTimeStamp)
+    const data  = {
         summary,
-        activityMap
+        activityMap,
+        dataWithInTimeStamp,
+        highestBehavior
     }
     
-    res.json({"message" : "The Cow Activity Details Of Id" , summarizedData})
+    res.json({"message" : "The Cow Activity Details Of Id" , data})
 
 
 

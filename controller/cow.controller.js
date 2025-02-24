@@ -1,5 +1,5 @@
 import { getDB } from "../db/db.js";
-import { timeStamp } from "../utils/time.behavior.js";
+import { allTime, timeStamp } from "../utils/time.behavior.js";
 
 //TODO: We will forward the data for the default case for last 30 min here for in this route and when the user change the timestamp range we will hit another api route
 
@@ -33,13 +33,18 @@ export const getCowDetails = async (req, res) => {
     return item.timestamp >= thirtyMinutesAgo && item.timestamp < new Date();
   });
 
-  const summary = timeStamp(200, groupedData[cowId]);
+  // const summary = allTime( groupedData[cowId]);
+  // const dataWithInTimeStamp = groupedData[cowId]
+  const {summary} = timeStamp(30000 , dataWithInTimeStamp)
 
   const data = {
     cows: dataWithInTimeStamp,
     // details: activityMap,
     summary: summary,
   };
+  const test = {
+    test2: "this is test",
+  }
 
   res.json({ messaage: "The Details of particular Cow ID", data });
 };
