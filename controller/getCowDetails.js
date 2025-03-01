@@ -1,16 +1,23 @@
+import { userInfo } from "os";
 import { getDB } from "../db/db.js";
 import { allTime, timeStamp } from "../utils/time.behavior.js";
+import cookieParser from "cookie-parser";
 
 //TODO: We will forward the data for the default case for last 30 min here for in this route and when the user change the timestamp range we will hit another api route
 
 export const getCowDetails = async (req, res) => {
   const collection = getDB().collection("cowactivity");
+  //  const userName  = req.cookies
+  // const userName  = 'test@gmail.com'
   const cowId = req.params.id;
+  const email  =  req.headers['authorization']?.split(' ')[1]
  
   const thirtyMinutesAgo = new Date(new Date().getTime() - 200 * 60 * 1000);
+  const userData = 'test@gmail.com'
 
   const dbData = await collection
-    .find({
+    .find({ user : email
+       
       // cow_id : cowId ,
       // timestamp : {
       //     $gte : thirtyMinutesAgo,

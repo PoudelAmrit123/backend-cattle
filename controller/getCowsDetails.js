@@ -5,7 +5,9 @@ export const getCowsDetails = async(req , res)=>{
 
 
       const collection   =  getDB().collection("cowactivity")
-      const dbData =  await collection.find({ }).sort({cow_id : 1 , timestamp : 1}).toArray()
+      const dbData =  await collection.find({ 
+        user : "test@gmail.com"
+      }).sort({cow_id : 1 , timestamp : 1}).toArray()
     
       const uniqueId = [... new Set( dbData.map(item => item.cow_id))]
       const totalLength = uniqueId.length || 0

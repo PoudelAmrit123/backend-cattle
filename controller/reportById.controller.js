@@ -4,6 +4,7 @@ import fs from 'fs'
 import PDFDocument from 'pdfkit'
 
 export const getReportById = async(req, res)=>{
+  const email  =  req.headers['authorization']?.split(' ')[1]
 
     const duration  = req.query.dur
     const cowId = req.params.id 
@@ -13,7 +14,9 @@ export const getReportById = async(req, res)=>{
 
     const collection   = getDB().collection('cowactivity')
 
-    const dbData = await collection.find({}).sort({ cow_id : 1  , timestamp : 1 }).toArray()
+    const dbData = await collection.find({
+      user : email
+    }).sort({ cow_id : 1  , timestamp : 1 }).toArray()
     
      
  

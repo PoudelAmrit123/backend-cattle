@@ -11,27 +11,10 @@ const connectToDB = async () => {
     await client.connect();
     console.log("Connecting to the database...");
 
-    // List databases
-    // const databases = await client.db().admin().listDatabases();
-    // console.log("Databases:", databases.databases);
-
-    // Select the database
+   
     db = client.db("cowactivity"); // Ensure this is a string
-    // console.log("The database is:", dbs.databaseName);
-
-    // List collections in "cowactivity"
-    // const collections = await dbs.listCollections().toArray();
-    // const collection   = db.collection("cowactivity")
-    // return collection
-    // console.log("Collections in 'cowactivity':", collections.map(c => c.name));
-    // const now = new Date();
-    // const thirtyMinutesAgo = new Date(now.getTime() - 30*24 *24* 60 * 1000);
-    // const data  = await collection.find({ cow_id : 1  , timestamp : {
-    //     $gte :  thirtyMinutesAgo ,
-    //     $lt  : now,
-  
-    // }}).toArray()
-    // console.log('data '  , data)
+   
+   
 
     console.log("Connected to the database");
   } catch (error) {

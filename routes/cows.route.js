@@ -1,14 +1,20 @@
 import express from "express";
-import { getAllCowsAllDetails } from "../controller/allCows.controller.js";
-import { getCowsDetails } from "../controller/cows.controller.js";
-import { getCowDetails } from "../controller/cow.controller.js";
-import { getCowActivityDetailsById } from "../controller/cowActivity.controller.js";
-import { getCowActivityDetailsByTimeStamp } from "../controller/getcowActivityByTimestamp.controller.js";
-import { getCowsActivityDetails} from "../controller/CowsActivityDetails.controller.js"
+import { getAllCowsAllDetails } from "../controller/getAllCowsAllDetails.js";
+import { getCowsDetails } from "../controller/getCowsDetails.js";
+import { getCowDetails } from "../controller/getCowDetails.js";
+import { getCowActivityDetailsById } from "../controller/getCowActivityDetailsById.js";
+import { getCowActivityDetailsByTimeStamp } from "../controller/getCowActivityDetailsByTimeStamp.js";
+import { getCowsActivityDetails} from "../controller/getCowsActivityDetails.js"
 import { getReport} from "../controller/report.controller.js"
 import { getReportById} from "../controller/reportById.controller.js"
+import { loginController } from "../controller/login.controller.js"
+import { signupController } from "../controller/signup.controller.js"
+
 
 const router = express.Router();
+
+router.post('/login' ,  loginController)
+router.post('/signup' ,  signupController)
 
 router.get("/cows", getAllCowsAllDetails);
 router.get("/cow", getCowsDetails);

@@ -4,12 +4,18 @@ import { timeStamp  , allTime} from "../utils/time.behavior.js"
 
 
 export const getCowsActivityDetails = async(req , res)=>{
+
+ 
+  const email  =  req.headers['authorization']?.split(' ')[1]
   let duration  = ""
 
-   duration =  req.query.dur 
+  //  duration =  req.query.dur ?  parseInt(req.query.dur) : 360000
+   duration =  req.query.dur
 
  const collection   =  getDB().collection('cowactivity')
-  const dbData = await collection.find({}).sort({ cow_id : 1  , timestamp : 1 }).toArray()
+  const dbData = await collection.find({
+  user : email
+  }).sort({ cow_id : 1  , timestamp : 1 }).toArray()
   const uniqueId = [... new Set( dbData.map(item => item.cow_id))]
   const length = uniqueId.length
 
@@ -61,7 +67,8 @@ export const getCowsActivityDetails = async(req , res)=>{
     const data = {
       returnData , 
       totalBehaviors,
-      length
+      length,
+      duration
     }
 
     
@@ -72,7 +79,7 @@ export const getCowsActivityDetails = async(req , res)=>{
     
    
 
-    res.json({"message" :"api is working fine " , data})
+    res.json({"message" :"Activity by timestamp  " , data})
 
  
 }
